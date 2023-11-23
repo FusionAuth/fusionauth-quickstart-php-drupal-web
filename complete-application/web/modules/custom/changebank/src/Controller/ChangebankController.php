@@ -24,8 +24,8 @@ class ChangebankController extends ControllerBase {
    */
   public function accountBalance() {
     $value = \Drupal::state()->get('changebank_form_value');
-    $arguments = $value->getArguments();
-    $dollars = $arguments['@dollars'];
+    $arguments = ($value) ? $value->getArguments() : [];
+    $dollars = $arguments['@dollars'] ?? 0;
     return [
       '#markup' => '<span class="account-balance">$' . $dollars . '</span>',
       '#cache' => [
