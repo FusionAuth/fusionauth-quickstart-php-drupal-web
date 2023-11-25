@@ -15,14 +15,14 @@ Clone this repository to your local machine and then enter the fusionauth-quicks
 
 Open a bash terminal in the root of this directory and run the following command to pull the necessary Docker images:
 
-```
-docker-compose pull
+```bash
+docker compose pull
 ```
 
 Next, run the following command to start the Drupal and FusionAuth containers:
 
-```
-docker-compose up -d
+```bash
+docker compose up -d
 ```
 
 If all is well, you should see the following running containers:
@@ -36,20 +36,20 @@ If all is well, you should see the following running containers:
 
 If one of the containers fails to start, or you wish to reset the system, run the following commands to stop and remove all containers and volumes:
 
-```
-docker-compose kill
-docker-compose rm -fv
-docker-compose down -v
+```bash
+docker compose kill
+docker compose rm -fv
+docker compose down -v
 ```
 
-`docker-compose kill` stops all running containers, `docker-compose rm -fv` removes them and then `docker-compose down -v` removes the volumes.
+`docker compose kill` stops all running containers, `docker compose rm -fv` removes them and then `docker compose down -v` removes the volumes.
 
-You'll then need to re-run `docker-compose pull` and `docker-compose up -d` to start the containers again.
+You'll then need to re-run `docker compose up -d` to start the containers again.
 
 
 The FusionAuth configuration files make use of a unique feature of FusionAuth, called [Kickstart](https://fusionauth.io/docs/v1/tech/installation-guide/kickstart): when FusionAuth comes up for the first time, it will look at the [Kickstart file](./kickstart/kickstart.json) and mimic API calls to configure FusionAuth for use when it is first run. 
 
-> **NOTE**: If you ever want to reset the FusionAuth system, delete the volumes created by docker-compose as we explained above by executing `docker-compose down -v`. 
+> **NOTE**: If you ever want to reset the FusionAuth system, delete the volumes created by docker-compose as we explained above by executing `docker compose down -v`. 
 
 FusionAuth will be initially configured with these settings:
 
@@ -73,20 +73,20 @@ Open a bash terminal in the root of the `fusionauth-quickstart-php-drupal-web` d
 
 First we want to copy the database dump file located at ./db-backups into the db2 container. Run the following command to copy the file:
 
-```
+```bash
 docker cp ./db-backups/changebank.sql fusionauth-quickstart-php-drupal-web-db2-1:/changebank.sql
 ```
 
 Next, we want to import the dump file into the database. Run the following command to import the database:
 
-```
+```bash
 docker exec -i fusionauth-quickstart-php-drupal-web-db2-1 sh -c 'mysql -u drupal -pverybadpassword drupaldb < /changebank.sql'
 ```
 
 For the above to take effect, restart your containers by running the following command:
 
-```
-docker-compose restart
+```bash
+docker compose restart
 ```
 
 ### Accessing the Drupal App
@@ -141,19 +141,19 @@ The command-line tool, Drush, is installed in the Drupal container and you can m
 
 One such task is to import or export config for the database. To do so, open a bash terminal in the root of the `fusionauth-quickstart-php-drupal-web` directory and run the following command to enter the Drupal container:
 
-```
-docker exec -it fusionauth-quickstart-php-drupal-web-web-1 bash
+```bash
+docker compose exec web bash
 ```
 
 Once inside the container, you can run the following command to export the config:
 
-```
+```bash
 vendor/bin/drush cex
 ```
 
 Or to import config:
   
-```
+```bash
 vendor/bin/drush cim
 ```
 
@@ -186,13 +186,13 @@ Ensure FusionAuth is running in the Docker container.  You should be able to log
 
 Incorrect line endings are known to cause this issue. To fix the issue, you need to convert the line endings of the file from Windows to Unix. this can be done by use of the `dos2unix` command. You can install `dos2unix` by running the following command inside the Drupal container:
 
-```
+```bash
 apt-get update && apt-get install -y dos2unix
 ```
 
 Once installed, you can convert the line endings of the file by running the following command inside the Drupal container:
 
-```
+```bash
 dos2unix /opt/drupal/vendor/bin/drush
 ```
 
