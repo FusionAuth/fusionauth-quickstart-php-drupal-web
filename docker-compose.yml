@@ -3,7 +3,7 @@ services:
   web:
     image: drupal:php8.2-apache-bullseye
     volumes:
-      - ./your-application:/opt/drupal:cached
+      - ./complete-application:/opt/drupal:cached
     ports:
       - "80:80"
     networks:
@@ -13,7 +13,7 @@ services:
     environment:
       MYSQL_TCP_PORT: 3307
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: changebank
+      MYSQL_DATABASE: drupaldb
       MYSQL_USER: drupal
       MYSQL_PASSWORD: verybadpassword
     ports:
