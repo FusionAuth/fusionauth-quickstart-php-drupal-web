@@ -42,7 +42,7 @@ class ChangebankForm extends FormBase {
       '#type' => 'number',
       '#title' => $this->t('Amount in USD: $'),
       '#required' => TRUE,
-      '#min' => 1,
+      '#min' => 0,
       '#step' => 0.01,
     ];
     $form['submit'] = [
