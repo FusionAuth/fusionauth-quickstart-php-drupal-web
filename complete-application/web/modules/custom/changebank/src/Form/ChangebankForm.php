@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\changebank\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -56,20 +58,20 @@ class ChangebankForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $amount = $form_state->getValue('amount');
-  
+
     $amount_in_cents = round($amount * 100);
-  
+
     $quarters = floor($amount_in_cents / 25);
     $amount_in_cents %= 25;
-  
+
     $dimes = floor($amount_in_cents / 10);
     $amount_in_cents %= 10;
-  
+
     $nickels = floor($amount_in_cents / 5);
     $amount_in_cents %= 5;
-  
+
     $pennies = $amount_in_cents;
-  
+
     $coins = [];
     if ($quarters > 0) {
       $coins[] = "@quarters quarters";
@@ -83,7 +85,7 @@ class ChangebankForm extends FormBase {
     if ($pennies > 0) {
       $coins[] = "@pennies pennies";
     }
-  
+
     $result = $this->t('We can make change for $@dollars with ' . implode(', ', $coins) . '!', [
       '@dollars' => $amount,
       '@quarters' => $quarters,
@@ -91,10 +93,10 @@ class ChangebankForm extends FormBase {
       '@nickels' => $nickels,
       '@pennies' => $pennies,
     ]);
-  
+
     $form_state->setRebuild(TRUE);
     $form_state->set('result', $result);
-  
+
     \Drupal::state()->set('changebank_form_value', $result);
   }
 
