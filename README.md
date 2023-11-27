@@ -1,17 +1,21 @@
 # Quickstart: Drupal app with FusionAuth
 
-This repository contains a Drupal app that works with a locally running instance of [FusionAuth](https://fusionauth.io/), the authentication and authorization platform.
+This repository contains a Drupal app that uses [FusionAuth](https://fusionauth.io/), as the authentication provider.
 
 ## Setup
 
 ### Prerequisites
+
+- [PHP](https://www.php.net/downloads.php) 8.1.0+
+- [Composer](https://getcomposer.org/)
+- [GD extension](https://www.php.net/manual/en/book.image.php)
 - [Docker](https://www.docker.com): The quickest way to stand up FusionAuth. (There are [other ways](/docs/v1/tech/installation-guide/))
 
-NOTE: Drupal 10 requires `PHP 8.1.0 or higher` and `MariaDB 10.3.7+` or `MySQL/Percona 5.7.8+` in order to run.
+> NOTE: Drupal 10 requires `PHP 8.1.0 or higher` and `MariaDB 10.3.7+` or `MySQL/Percona 5.7.8+` in order to run.
 
 ### Installation
 
-Clone this repository to your local machine and then enter the fusionauth-quickstart-php-drupal-web directory.
+Clone this repository to your local machine and then enter the `fusionauth-quickstart-php-drupal-web` directory.
 
 Open a bash terminal in the root of this directory and run the following command to pull the necessary Docker images:
 
@@ -31,8 +35,7 @@ If all is well, you should see the following running containers:
 - `fusionauth-quickstart-php-drupal-web-db-1`: FusionAuth's PostrgreSQL database.
 - `fusionauth-quickstart-php-drupal-web-db2-1`: Drupal's MySQL database.
 - `fusionauth-quickstart-php-drupal-web-fusionauth-1`: The FusionAuth container.
-- `fusionauth-quickstart-php-drupal-web-pma-1`: The phpMyAdmin container.
-- `fusionauth-quickstart-php-drupal-web-search-1`: The Elasticsearch container.
+- `fusionauth-quickstart-php-drupal-web-search-1`: The Opensearch container.
 
 If one of the containers fails to start, or you wish to reset the system, run the following commands to stop and remove all containers and volumes:
 
