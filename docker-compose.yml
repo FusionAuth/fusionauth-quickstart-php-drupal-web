@@ -8,6 +8,8 @@ services:
       - "80:80"
     networks:
       - db_net
+    extra_hosts:
+      - host.docker.internal:host-gateway
   db2:
     image: mysql:latest
     environment:
