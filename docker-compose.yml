@@ -69,7 +69,7 @@ services:
       - search_net
 
   fusionauth:
-    image: fusionauth/fusionauth-app:latest
+    image: fusionauth/fusionauth-app:local
     extra_hosts:
       - host.docker.internal:host-gateway
     depends_on:
